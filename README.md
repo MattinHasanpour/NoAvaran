@@ -1,66 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌐 وب‌سایت احراز هویت و مدیریت کاربران با لاراول
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+این پروژه یک سیستم کامل احراز هویت (Authentication) با استفاده از فریم‌ورک قدرتمند **Laravel** است که شامل امکاناتی همچون ثبت‌نام، ورود، خروج، بازیابی رمز عبور، صفحه مقالات، مشاهده پیام‌های سیستمی و ... می‌باشد. رابط کاربری پروژه با استفاده از **Tailwind CSS** طراحی شده تا ظاهری مدرن و ریسپانسیو داشته باشد.
 
-## About Laravel
+## 📌 ویژگی‌های اصلی
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   ثبت‌نام کاربر با اعتبارسنجی سمت سرور
+-   ورود ایمن کاربران
+-   خروج از حساب کاربری
+-   امکان بازیابی رمز عبور از طریق ایمیل (با ارسال لینک به ایمیل کاربر)
+-   صفحه لیست پست‌ها (پس از ورود کاربر قابل مشاهده است)
+-   پیغام‌های سیستمی (success و error) در صفحات فرم
+-   طراحی تمیز و کاربرپسند با استفاده از TailwindCSS
+-   محافظت از مسیرها با Middleware
+-   قابلیت مشاهده تصویر مشخص
+-   امکان ارسال پیام مستقیم از طریق:
+    -   [اینستاگرام](https://instagram.com/matinhasanpour_)
+    -   [تلگرام](https://t.me/mattinhasanpour)
+    -   ایمیل مستقیم به توسعه‌دهنده
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📁 ساختار صفحات
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. صفحه اصلی (home)
 
-## Learning Laravel
+صفحه ساده‌ای برای معرفی پروژه.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. احراز هویت (auth)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   `login.blade.php`  
+    فرم ورود کاربران به سیستم همراه با دکمه نمایش/مخفی کردن رمز عبور.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   `register.blade.php`  
+    فرم ثبت‌نام کاربران با اعتبارسنجی کامل.
 
-## Laravel Sponsors
+-   `forgetPassword.blade.php`  
+    فرم بازیابی رمز عبور که لینک بازیابی را به ایمیل کاربر ارسال می‌کند.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   `resetPassword.blade.php`  
+    صفحه وارد کردن رمز عبور جدید همراه با اعتبارسنجی.
 
-### Premium Partners
+### 3. لیست پست‌ها (posts/index.blade.php)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+لیست پست‌ها فقط بعد از ورود به سیستم قابل مشاهده است.
 
-## Contributing
+## ⚙️ مسیرها (Routes)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```php
+// Auth routes
+Route::get('/register', [AuthController::class , 'register'])->name('register');
+Route::post('/register', [AuthController::class , 'registerPost'])->name('register.post');
+Route::get('/login',[AuthController::class, 'login'])->name('login');
+Route::post('/login',[AuthController::class, 'loginPost'])->name('login.post');
+Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 
-## Code of Conduct
+// Password reset
+Route::get('/forget-password', [ForgetPasswordController::class , 'forgetPassword'])->name('forgetPassword');
+Route::post('/forget-password', [ForgetPasswordController::class , 'forgetPasswordPost'])->name('forget.password.post');
+Route::get('/reset-password/{token}', [ForgetPasswordController::class , 'resetPassword'])->name('reset.password');
+Route::post('/reset-password', [ForgetPasswordController::class , 'resetPasswordPost'])->name('reset.password.post');
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+// Protected page
+Route::get('/posts', [PostController::class , 'index'])->name('posts.index')->middleware('auth');
+```
 
-## Security Vulnerabilities
+## 🔒 امنیت
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-   استفاده از توکن CSRF در فرم‌ها
+-   ذخیره رمز عبور به صورت هش‌شده با Bcrypt
+-   اعتبارسنجی قوی در سرور
+-   Token منحصر به‌فرد و تاریخ‌دار برای بازیابی رمز عبور
 
-## License
+## 💻 تکنولوژی‌های استفاده‌شده
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| تکنولوژی     | توضیح                        |
+| ------------ | ---------------------------- |
+| Laravel      | فریم‌ورک اصلی PHP            |
+| TailwindCSS  | طراحی رابط کاربری واکنش‌گرا  |
+| MySQL        | پایگاه‌داده                  |
+| Mail Service | ارسال ایمیل بازیابی رمز عبور |
+| Blade        | موتور قالب برای صفحات        |
+
+## 🧪 نحوه اجرای پروژه
+
+1. کلون کردن پروژه:
+
+```bash
+git clone https://github.com/MattinHasanpour/NoAvaran.git
+```
+
+2. نصب وابستگی‌ها:
+
+```bash
+composer install
+```
+
+3. تنظیم فایل `.env` و اجرای Migrations:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+```
+
+4. اجرای سرور توسعه:
+
+```bash
+php artisan serve
+```
+
+## 📸 تصاویر پروژه
+
+| ![HomePage](public/123.png)
+
+## 📬 تماس با من
+
+-   ✉️ ایمیل: your@email.com
+-   💬 [تلگرام](https://t.me/mattinhasanpour)
+-   📸 [اینستاگرام](https://instagram.com/matinhasanpour_)
+
+## ✅ سایر امکانات پیشنهادی (در آینده)
+
+-   ارسال ایمیل تایید ثبت‌نام
+-   قابلیت بارگذاری عکس پروفایل
+-   پنل مدیریت کاربران
+-   بلاگ اختصاصی
+-   نوتیفیکیشن‌های درون‌سیستمی
+
+## ⚖️ مجوز
+
+این پروژه تحت لایسنس MIT ارائه شده است. شما می‌توانید آن را برای هر نوع استفاده شخصی یا تجاری توسعه دهید.
+
+> ساخته‌شده با ❤️ توسط متین
